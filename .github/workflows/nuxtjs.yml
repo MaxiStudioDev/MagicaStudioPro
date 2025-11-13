@@ -1,0 +1,52 @@
+name: Deploy Nuxt.js site to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      # 1️⃣ Checkout le repo
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2️⃣ Installer Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # 3️⃣ Installer les dépendances Nuxt
+      - name: Install dependencies
+        run: npm ci
+
+      # 4️⃣ Build le site en statique
+      - name: Build Nuxt.js
+        run: npm run generate
+
+      # 5️⃣ Copier le fichier .exe dans le dist
+      - name: Copy MagicaSetup.exe
+        run: |
+          mkdir -p dist/download
+          curl -L -o dist/download/MagicaSetup.exe https://github.com/MaxiStudioDev/MagicaStudioPro/releases/download/1.0/MagicaSetup.exe
+
+      # 6️⃣ Déployer sur GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
