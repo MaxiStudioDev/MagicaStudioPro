@@ -2,44 +2,65 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Télécharger mon app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Magica Studio Pro</title>
   <style>
     body {
       background: linear-gradient(135deg, #0f172a, #1e293b);
       color: #fff;
-      text-align: center;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: "Poppins", Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       margin: 0;
-      padding: 5%;
+      text-align: center;
+      overflow: hidden;
     }
-    h1 { font-size: 2.5rem; margin-bottom: 0.5em; }
-    p { color: #cbd5e1; margin-bottom: 2em; }
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5em;
+    }
+    p {
+      color: #cbd5e1;
+      max-width: 600px;
+      margin-bottom: 2em;
+      line-height: 1.5;
+    }
     button {
       background: #3b82f6;
-      color: white;
+      color: #fff;
       border: none;
       padding: 15px 40px;
       border-radius: 12px;
       font-size: 18px;
       cursor: pointer;
       transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
     }
     button:hover {
       background: #2563eb;
       transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    }
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.9rem;
+      color: #94a3b8;
     }
   </style>
 </head>
 <body>
-  <h1>🚀 Télécharge mon app</h1>
-  <p>Un clic suffit pour commencer l’aventure !</p>
+  <h1>🚀 Magica Studio Pro</h1>
+  <p>Crée, édite et publie tes projets avec puissance et style.<br>
+  Télécharge la dernière version ci-dessous 👇</p>
 
-  <button onclick="window.location.href='https://github.com/tonpseudo/tonrepo/releases/latest/download/monapp.apk'">
-    Télécharger 📦
+  <button onclick="window.location.href='https://github.com/MaxiStudioDev/MagicaStudioPro/releases/latest/download/MagicaStudioPro.zip'">
+    Télécharger maintenant 📦
   </button>
 
-  <footer style="margin-top:3em; font-size:14px; color:#94a3b8;">
-    © 2025 TonNom — Tous droits réservés
-  </footer>
+  <footer>© 2025 MaxiStudioDev — Tous droits réservés</footer>
 </body>
 </html>
