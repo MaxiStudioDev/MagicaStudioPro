@@ -40,41 +40,23 @@
 </head>
 <body>
   <h1>🚀 Magica Studio Pro</h1>
-  <p>Télécharge toujours la dernière version de <strong>MagicaSetup.exe</strong> directement depuis GitHub 👇</p>
+  <p>Télécharge directement <strong>MagicaSetup.exe</strong> 👇</p>
 
-  <button id="downloadBtn">Chargement…</button>
+  <button id="downloadBtn">Télécharger maintenant 📦</button>
 
   <footer>© 2025 MaxiStudioDev — Tous droits réservés</footer>
 
   <script>
     const btn = document.getElementById("downloadBtn");
-    const owner = "MaxiStudioDev";
-    const repo = "MagicaStudioPro";
-    const targetFile = "MagicaSetup.exe"; // on force ce fichier exact
 
-    async function loadLatestExe() {
-      try {
-        const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`);
-        const data = await res.json();
+    // URL directe du fichier .exe
+    const latestVersion = "1.0"; // tu peux changer automatiquement si tu veux
+    const exeUrl = `https://github.com/MaxiStudioDev/MagicaStudioPro/releases/download/${latestVersion}/MagicaSetup.exe`;
 
-        // On prend exactement MagicaSetup.exe
-        const exeAsset = data.assets.find(a => a.name === targetFile);
-
-        if (exeAsset) {
-          btn.textContent = `Télécharger la dernière version (${data.tag_name}) 📦`;
-          btn.onclick = () => window.location.href = exeAsset.browser_download_url;
-        } else {
-          btn.textContent = `${targetFile} introuvable dans la dernière release`;
-          btn.disabled = true;
-        }
-      } catch (err) {
-        console.error(err);
-        btn.textContent = "Erreur GitHub API";
-        btn.disabled = true;
-      }
-    }
-
-    loadLatestExe();
+    btn.onclick = () => {
+      // Téléchargement direct
+      window.location.href = exeUrl;
+    };
   </script>
 </body>
 </html>
