@@ -1,4 +1,5 @@
-name: Build & Deploy Nuxt.js with dynamic MagicaSetup.exe
+name: Install dependencies
+run: npm install
 
 on:
   push:
