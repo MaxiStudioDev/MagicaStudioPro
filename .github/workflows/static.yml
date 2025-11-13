@@ -49,13 +49,13 @@
     fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`)
       .then(res => res.json())
       .then(data => {
-        // Cherche le fichier MagicaSetup.exe
+        // Cherche **exactement** l’asset MagicaSetup.exe
         const exeAsset = data.assets.find(a => a.name === "MagicaSetup.exe");
         if (exeAsset) {
           btn.textContent = "Télécharger la dernière version 📦";
           btn.onclick = () => window.location.href = exeAsset.browser_download_url;
         } else {
-          btn.textContent = "Pas de MagicaSetup.exe trouvé dans la dernière release";
+          btn.textContent = "MagicaSetup.exe introuvable dans la dernière release";
           btn.disabled = true;
         }
       })
