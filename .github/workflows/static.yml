@@ -16,7 +16,6 @@
       height: 100vh;
       margin: 0;
       text-align: center;
-      overflow: hidden;
     }
     h1 { font-size: 3rem; margin-bottom: 0.5em; }
     p { color: #cbd5e1; max-width: 600px; margin-bottom: 2em; line-height: 1.5; }
@@ -29,44 +28,34 @@
       font-size: 18px;
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
     }
-    button:hover {
-      background: #2563eb;
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
-    }
+    button:hover { background: #2563eb; transform: scale(1.05); }
     footer { position: absolute; bottom: 15px; font-size: 0.9rem; color: #94a3b8; }
   </style>
 </head>
 <body>
   <h1>🚀 Magica Studio Pro</h1>
-  <p>Crée, édite et publie tes projets avec puissance et style.<br>
-  Télécharge toujours la dernière version ci-dessous 👇</p>
+  <p>Télécharge toujours la dernière version de MagicaSetup.exe directement depuis les releases GitHub 👇</p>
 
-  <button id="downloadBtn">Téléchargement en cours...</button>
+  <button id="downloadBtn">Chargement…</button>
 
   <footer>© 2025 MaxiStudioDev — Tous droits réservés</footer>
 
   <script>
     const btn = document.getElementById("downloadBtn");
-
-    // GitHub API : dernier release
     const owner = "MaxiStudioDev";
     const repo = "MagicaStudioPro";
 
     fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`)
       .then(res => res.json())
       .then(data => {
-        // Cherche l'asset .exe
-        const exeAsset = data.assets.find(a => a.name.endsWith(".exe"));
+        // Cherche le fichier MagicaSetup.exe
+        const exeAsset = data.assets.find(a => a.name === "MagicaSetup.exe");
         if (exeAsset) {
           btn.textContent = "Télécharger la dernière version 📦";
-          btn.onclick = () => {
-            window.location.href = exeAsset.browser_download_url;
-          };
+          btn.onclick = () => window.location.href = exeAsset.browser_download_url;
         } else {
-          btn.textContent = "Pas de version .exe trouvée";
+          btn.textContent = "Pas de MagicaSetup.exe trouvé dans la dernière release";
           btn.disabled = true;
         }
       })
