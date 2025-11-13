@@ -107,19 +107,33 @@
     fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`)
       .then(res => res.json())
       .then(data => {
-        // Cherche le fichier MagicaSetup.exe
-        const exeAsset = data.assets.find(a => a.name === "MagicaSetup.exe");
-        if (exeAsset) {
-          btn.textContent = "Télécharger la dernière version 📦";
-          btn.onclick = () => window.location.href = exeAsset.browser_download_url;
+        console.log("Tous les fichiers disponibles:", data.assets);
+        
+        // Cherche uniquement les fichiers .exe et exclut les .zip
+        const exeAssets = data.assets.filter(a => 
+          a.name.toLowerCase().endsWith('.exe') && 
+          !a.name.toLowerCase().endsWith('.zip')
+        );
+        
+        console.log("Fichiers .exe trouvés:", exeAssets);
+        
+        if (exeAssets.length > 0) {
+          // Prend le premier fichier .exe trouvé
+          const exeAsset = exeAssets[0];
+          btn.textContent = `Télécharger ${exeAsset.name} 📦`;
+          btn.onclick = () => {
+            console.log("Téléchargement:", exeAsset.browser_download_url);
+            window.location.href = exeAsset.browser_download_url;
+          };
         } else {
-          btn.textContent = "Pas de MagicaSetup.exe trouvé dans la dernière version";
+          btn.textContent = "Aucun fichier .exe trouvé dans la dernière version";
           btn.disabled = true;
+          console.log("Aucun .exe trouvé, voici les assets:", data.assets.map(a => a.name));
         }
       })
       .catch(err => {
-        console.error(err);
-        btn.textContent = "Erreur API GitHub";
+        console.error("Erreur API GitHub:", err);
+        btn.textContent = "Erreur de connexion à GitHub";
         btn.disabled = true;
       });
   </script>
