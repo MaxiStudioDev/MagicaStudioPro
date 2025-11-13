@@ -40,7 +40,7 @@
 </head>
 <body>
   <h1>🚀 Magica Studio Pro</h1>
-  <p>Télécharge toujours la dernière version de <strong>MagicaSetup.exe</strong> directement depuis les releases GitHub 👇</p>
+  <p>Télécharge toujours la dernière version de <strong>MagicaSetup.exe</strong> directement depuis GitHub 👇</p>
 
   <button id="downloadBtn">Chargement…</button>
 
@@ -50,14 +50,14 @@
     const btn = document.getElementById("downloadBtn");
     const owner = "MaxiStudioDev";
     const repo = "MagicaStudioPro";
-    const targetFile = "MagicaSetup.exe"; // le fichier exact que l'on veut
+    const targetFile = "MagicaSetup.exe"; // on force ce fichier exact
 
     async function loadLatestExe() {
       try {
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`);
         const data = await res.json();
 
-        // Cherche exactement l’asset MagicaSetup.exe
+        // On prend exactement MagicaSetup.exe
         const exeAsset = data.assets.find(a => a.name === targetFile);
 
         if (exeAsset) {
