@@ -5,12 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Magica Studio Pro</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-    
-    * {
-      box-sizing: border-box;
-    }
-    
     body {
       background: linear-gradient(135deg, #0f172a, #1e293b);
       color: #fff;
@@ -19,27 +13,21 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      height: 100vh;
       margin: 0;
-      padding: 20px;
       text-align: center;
-      position: relative;
+      overflow: hidden;
     }
-    
-    h1 { 
-      font-size: clamp(2.5rem, 5vw, 3.5rem); 
-      margin-bottom: 0.5em; 
-      font-weight: 700;
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5em;
     }
-    
-    p { 
-      color: #cbd5e1; 
-      max-width: 600px; 
-      margin-bottom: 2em; 
-      line-height: 1.5; 
-      font-size: 1.1rem;
+    p {
+      color: #cbd5e1;
+      max-width: 600px;
+      margin-bottom: 2em;
+      line-height: 1.5;
     }
-    
     button {
       background: #3b82f6;
       color: #fff;
@@ -47,95 +35,32 @@
       padding: 15px 40px;
       border-radius: 12px;
       font-size: 18px;
-      font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
       box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
     }
-    
     button:hover {
       background: #2563eb;
       transform: scale(1.05);
       box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
     }
-    
-    button:disabled {
-      background: #64748b;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-    
-    footer { 
-      position: absolute; 
-      bottom: 15px; 
-      font-size: 0.9rem; 
-      color: #94a3b8; 
-      width: 100%;
-      text-align: center;
-    }
-    
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 2rem;
-      }
-      
-      p {
-        font-size: 1rem;
-      }
-      
-      button {
-        padding: 12px 30px;
-        font-size: 16px;
-      }
+    footer {
+      position: absolute;
+      bottom: 15px;
+      font-size: 0.9rem;
+      color: #94a3b8;
     }
   </style>
 </head>
 <body>
   <h1>🚀 Magica Studio Pro</h1>
-  <p>Téléchargez toujours la dernière version de MagicaSetup.exe directement depuis les releases GitHub 👇</p>
+  <p>Crée, édite et publie tes projets avec puissance et style.<br>
+  Télécharge la dernière version ci-dessous 👇</p>
 
-  <button id="downloadBtn">Charger…</button>
+  <button onclick="window.location.href='https://github.com/MaxiStudioDev/MagicaStudioPro/releases/download/1.0/MagicaSetup.exe'">
+    Télécharger maintenant 📦
+  </button>
 
   <footer>© 2025 MaxiStudioDev — Tous droits réservés</footer>
-
-  <script>
-    const btn = document.getElementById("downloadBtn");
-    const owner = "MaxiStudioDev";
-    const repo = "MagicaStudioPro";
-
-    fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`)
-      .then(res => res.json())
-      .then(data => {
-        console.log("Données reçues:", data); // Pour debug
-        
-        // Cherche d'abord MagicaSetup.exe, sinon prend le premier asset .exe
-        let exeAsset = data.assets.find(a => a.name === "MagicaSetup.exe");
-        
-        // Si pas trouvé, cherche n'importe quel fichier .exe
-        if (!exeAsset) {
-          exeAsset = data.assets.find(a => a.name.endsWith('.exe'));
-        }
-        
-        // Si pas trouvé, cherche n'importe quel fichier
-        if (!exeAsset && data.assets.length > 0) {
-          exeAsset = data.assets[0]; // Prend le premier fichier disponible
-        }
-        
-        if (exeAsset) {
-          btn.textContent = `Télécharger ${exeAsset.name} 📦`;
-          btn.onclick = () => window.location.href = exeAsset.browser_download_url;
-          console.log("Fichier trouvé:", exeAsset.name, exeAsset.browser_download_url);
-        } else {
-          btn.textContent = "Aucun fichier trouvé dans la dernière version";
-          btn.disabled = true;
-        }
-      })
-      .catch(err => {
-        console.error("Erreur:", err);
-        btn.textContent = "Erreur de connexion à GitHub";
-        btn.disabled = true;
-      });
-  </script>
 </body>
 </html>
