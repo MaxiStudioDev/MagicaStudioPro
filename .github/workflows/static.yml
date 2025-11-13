@@ -42,21 +42,10 @@
   <h1>🚀 Magica Studio Pro</h1>
   <p>Télécharge directement <strong>MagicaSetup.exe</strong> 👇</p>
 
-  <button id="downloadBtn">Télécharger maintenant 📦</button>
+  <button onclick="window.location.href='https://github.com/MaxiStudioDev/MagicaStudioPro/releases/download/1.0/MagicaSetup.exe'">
+    Télécharger maintenant 📦
+  </button>
 
   <footer>© 2025 MaxiStudioDev — Tous droits réservés</footer>
-
-  <script>
-    const btn = document.getElementById("downloadBtn");
-
-    // URL directe du fichier .exe
-    const latestVersion = "1.0"; // tu peux changer automatiquement si tu veux
-    const exeUrl = `https://github.com/MaxiStudioDev/MagicaStudioPro/releases/download/${latestVersion}/MagicaSetup.exe`;
-
-    btn.onclick = () => {
-      // Téléchargement direct
-      window.location.href = exeUrl;
-    };
-  </script>
 </body>
 </html>
