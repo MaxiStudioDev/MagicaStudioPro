@@ -28,14 +28,19 @@
       font-size: 18px;
       cursor: pointer;
       transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
     }
-    button:hover { background: #2563eb; transform: scale(1.05); }
+    button:hover {
+      background: #2563eb;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+    }
     footer { position: absolute; bottom: 15px; font-size: 0.9rem; color: #94a3b8; }
   </style>
 </head>
 <body>
   <h1>🚀 Magica Studio Pro</h1>
-  <p>Télécharge la dernière version de MagicaSetup.exe directement depuis les releases GitHub 👇</p>
+  <p>Télécharge toujours la dernière version de <strong>MagicaSetup.exe</strong> directement depuis les releases GitHub 👇</p>
 
   <button id="downloadBtn">Chargement…</button>
 
@@ -45,21 +50,19 @@
     const btn = document.getElementById("downloadBtn");
     const owner = "MaxiStudioDev";
     const repo = "MagicaStudioPro";
-    const targetFile = "MagicaSetup.exe"; // on ne veut QUE ce fichier
+    const targetFile = "MagicaSetup.exe"; // le fichier exact que l'on veut
 
     async function loadLatestExe() {
       try {
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases/latest`);
         const data = await res.json();
 
-        // Cherche exactement le fichier MagicaSetup.exe
+        // Cherche exactement l’asset MagicaSetup.exe
         const exeAsset = data.assets.find(a => a.name === targetFile);
 
         if (exeAsset) {
           btn.textContent = `Télécharger la dernière version (${data.tag_name}) 📦`;
-          btn.onclick = () => {
-            window.location.href = exeAsset.browser_download_url;
-          };
+          btn.onclick = () => window.location.href = exeAsset.browser_download_url;
         } else {
           btn.textContent = `${targetFile} introuvable dans la dernière release`;
           btn.disabled = true;
